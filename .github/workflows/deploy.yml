@@ -1,0 +1,45 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag (e.g., v2, v3)'
+        required: true
+        default: 'v1'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build Docker image
+      run: |
+        VERSION=${{ github.event.inputs.version || 'v1' }}
+        docker build -t demo-app:$VERSION .
+        echo "Built image: demo-app:$VERSION"
+
+    - name: Save build info
+      run: |
+        echo "Build completed at $(date)" >> build-info.txt
+        echo "Version: ${{ github.event.inputs.version || 'v1' }}" >> build-info.txt
+        echo "Commit: ${{ github.sha }}" >> build-info.txt
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-info
+        path: build-info.txt
+
+  # Note: Actual deployment would require secrets and K8s access
+  # For local demo, you'll deploy manually with kubectl
