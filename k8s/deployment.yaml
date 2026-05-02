@@ -35,7 +35,7 @@ spec:
             memory: "128Mi"
             cpu: "100m"
           limits:
-            memory: "256Mi"  # Start with reasonable limit
+            memory: "64Mi"  # Start with reasonable limit
             cpu: "200m"
         livenessProbe:
           httpGet:
