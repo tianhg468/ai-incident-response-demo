@@ -35,7 +35,7 @@ spec:
             memory: "128Mi"
             cpu: "100m"
           limits:
-            memory: "64Mi"  # Start with reasonable limit
+            memory: "256Mi"  # Will be lowered by trigger script to cause OOM
             cpu: "200m"
         livenessProbe:
           httpGet:
