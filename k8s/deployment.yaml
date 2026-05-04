@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+wapiVersion: apps/v1
 kind: Deployment
 metadata:
   name: demo-app
@@ -17,39 +17,39 @@ spec:
         version: v1
     spec:
       containers:
-      - name: demo-app
-        image: demo-app:v1
-        imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 3000
-          name: http
-        env:
-        - name: APP_VERSION
-          value: "v1"
-        - name: PORT
-          value: "3000"
-        - name: NODE_ENV
-          value: "production"
-        resources:
-          requests:
-            memory: "128Mi"
-            cpu: "100m"
-          limits:
-            memory: "256Mi"  # Will be lowered by trigger script to cause OOM
-            cpu: "200m"
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 3000
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          timeoutSeconds: 3
-          failureThreshold: 3
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 3000
-          initialDelaySeconds: 5
-          periodSeconds: 5
-          timeoutSeconds: 3
-          failureThreshold: 2
+        - name: demo-app
+          image: demo-app:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              name: http
+          env:
+            - name: APP_VERSION
+              value: "v1"
+            - name: PORT
+              value: "3000"
+            - name: NODE_ENV
+              value: "production"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "64Mi" # Will be lowered by trigger script to cause OOM
+              cpu: "200m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 2

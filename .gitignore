@@ -4,3 +4,6 @@ npm-debug.log
 *.log
 .env
 build-info.txt
+kubeconfig.b64
+k8s/webhook-secrets.yaml
+k8s/webhook-kubeconfig.yaml
