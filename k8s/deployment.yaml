@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: demo-app
-          image: ghcr.io/tianhg468/agentic-ai/demo-app:latest
+          image: ghcr.io/tianhg468/agentic-ai/demo-app:main
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
@@ -32,10 +32,10 @@ spec:
               value: "production"
           resources:
             requests:
-              memory: "16Mi"
+              memory: "8Mi"
               cpu: "100m"
             limits:
-              memory: "32Mi"
+              memory: "64Mi"
               cpu: "200m"
           livenessProbe:
             httpGet:
