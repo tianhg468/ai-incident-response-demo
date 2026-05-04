@@ -6,7 +6,7 @@ metadata:
     app: demo-app
     version: v1
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: demo-app
@@ -18,8 +18,8 @@ spec:
     spec:
       containers:
         - name: demo-app
-          image: demo-app:v1
-          imagePullPolicy: IfNotPresent
+          image: ghcr.io/tianhg468/agentic-ai/demo-app:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
               name: http
@@ -35,7 +35,7 @@ spec:
               memory: "128Mi"
               cpu: "100m"
             limits:
-              memory: "64 Mi"
+              memory: "256 Mi"
               cpu: "200m"
           livenessProbe:
             httpGet:
