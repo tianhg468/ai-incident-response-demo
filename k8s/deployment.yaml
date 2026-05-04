@@ -1,4 +1,4 @@
-wapiVersion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: demo-app
@@ -35,7 +35,7 @@ spec:
               memory: "128Mi"
               cpu: "100m"
             limits:
-              memory: "256 Mi"
+              memory: "64Mi"
               cpu: "200m"
           livenessProbe:
             httpGet:
